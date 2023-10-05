@@ -20,9 +20,13 @@ return new class extends Migration
             $table->dateTime('data_entrega');
             $table->string('status');
             $table->bigInteger('drone_id')->unsigned();
+            $table->bigInteger('video_id')->unsigned();
             $table->timestamps();
             $table->foreign('drone_id')
                 ->references('id')->on('drones')
+                ->onDelete('cascade');
+            $table->foreign('video_id')
+                ->references('id')->on('videos')
                 ->onDelete('cascade');
         });
     }
