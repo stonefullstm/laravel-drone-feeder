@@ -1,5 +1,7 @@
 <?php
 
+// https://mazer.dev/en/laravel/troubleshooting/how-to-fix-the-target-class-controller-does-not-exist-error-in-laravel/
+
 namespace App\Providers;
 
 use Illuminate\Cache\RateLimiting\Limit;
