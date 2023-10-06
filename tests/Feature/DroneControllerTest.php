@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use App\Models\Drone;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
@@ -15,13 +16,20 @@ class DroneControllerTest extends TestCase
      * @return void
      */
     public function testIndexReturnsDataInValidFormat() {
+        $payload = [
+            'name' => $this->faker->name,
+            'model' => $this->faker->company,
+        ];
+
+        Drone::create($payload);
+
         $this->json('get', 'api/drones')
             ->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure(
                 [
                     '*' => [
                         'id',
-                        'nome',
+                        'name',
                         'model',
                         'deliveries' => [
                             '*' => [
@@ -36,14 +44,19 @@ class DroneControllerTest extends TestCase
             );
     }
 
-    public function testUserIsCreatedSuccessfully() {
+    public function testDroneIsCreatedSuccessfully() {
         $payload = [
             'name' => $this->faker->name,
             'model' => $this->faker->company,
         ];
 
         $this->json('post', 'api/drones', $payload)
-            ->assertStatus(Response::HTTP_CREATED);
+            ->assertStatus(Response::HTTP_CREATED)
+            ->assertJsonStructure([
+                'id',
+                'name',
+                'model',
+            ]);
         
         $this->assertDatabaseHas('drones', $payload);
     }
