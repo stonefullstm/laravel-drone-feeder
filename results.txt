@@ -1,0 +1,4 @@
+Drone Controller (Tests\Feature\DroneController)
+ [x] Index returns data in valid format
+ [x] User is created successfully
+
