@@ -25,6 +25,8 @@ class DroneControllerTest extends TestCase
 
         $this->json('get', 'api/drones')
             ->assertStatus(Response::HTTP_OK)
+            ->assertJsonIsArray()
+            ->assertJsonCount(1)
             ->assertJsonStructure(
                 [
                     '*' => [
