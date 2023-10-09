@@ -14,8 +14,8 @@ class DroneController extends Controller
         return Drone::with('deliveries:id,latitude,longitude,data_entrega,status,drone_id')
             ->get(['id', 'name', 'model']);
     }
-/**
-* @OA\Post(
+    /**
+    * @OA\Post(
      *     path="/api/drones",
      *     summary="Register a new drone",
      *     @OA\Parameter(
